@@ -16,15 +16,15 @@ export default (ctx) => {
   controller.validate = async function (req, res) {
     if(req.user) {
       const user = await User.findOne({id: req.user.id})
-      if (!user) return res.status(404).json([{validate: false, message: 'Пользователь не найден в базе'}]);
+      if (!user) return res.status(404).json([{flag: false, message: 'Пользователь не найден в базе'}]);
       return [{
-        validate: true,
+        flag: true,
         __pack: 1,
         jwt: req.user,
         user: user,
       }]
     }
-    return res.status(404).json([{validate: false, message: 'Пользователь не найден в базе'}]);
+    return res.status(404).json([{flag: false, message: 'Пользователь не найден в базе'}]);
   }
 
   controller.getUserFields = function (req) {
